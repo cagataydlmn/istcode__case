@@ -15,20 +15,23 @@ const ProductDetailPage = () => {
   const [product, setProduct] = useState<Product | null>(null);
     console.log("id:",id);
     
-  useEffect(() => {
-    const getProductById = async (id: string) => {
-      try {
-        const response = await fetch("http://localhost:3000/dummy.json"); 
-        const products: Product[] = await response.json();        
-        const selectedProduct = products.find((product) => product.id == Number(id));
-        setProduct(selectedProduct || null);
-      } catch (error) {
-        console.error("Ürün alınamadı:", error);
+    useEffect(() => {
+      const getProductById = async (id: string) => {
+        try {
+          const response = await fetch("http://localhost:3000/dummy.json");
+          const products: Product[] = await response.json();
+          const selectedProduct = products.find((product) => product.id === Number(id));
+          setProduct(selectedProduct || null);
+        } catch (error) {
+          console.error("Ürün alınamadı:", error);
+        }
+      };
+    
+      if (id && typeof id === 'string') {
+        getProductById(id);
       }
-    };
-
-    if (id) getProductById(id);
-  }, [id]);
+    }, [id]);
+    
 
   if (!product) return <p>Ürün bulunamadı</p>;
 
