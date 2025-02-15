@@ -19,7 +19,7 @@ const Card = () => {
         setProducts(data);
         setFilteredProducts(data);
 
-        const uniqueCategories = Array.from(new Set(data.map((p: any) => p.category)));
+        const uniqueCategories:string[] = Array.from(new Set(data.map((p: any) => p.category)));
         setCategories(uniqueCategories);
       } catch (error) {
         console.error("Ürünler alınamadı:", error);
